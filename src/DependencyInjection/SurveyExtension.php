@@ -8,7 +8,7 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle\DependencyInjection;
+namespace LinkingYou\SurveyBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

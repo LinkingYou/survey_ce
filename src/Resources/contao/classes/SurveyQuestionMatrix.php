@@ -8,9 +8,9 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle;
+namespace LinkingYou\SurveyBundle;
 
-use Hschottm\SurveyBundle\Export\Exporter;
+use LinkingYou\SurveyBundle\Export\Exporter;
 
 /**
  * Class SurveyQuestionMatrix.

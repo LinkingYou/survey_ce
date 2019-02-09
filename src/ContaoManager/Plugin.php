@@ -10,13 +10,13 @@ declare(strict_types=1);
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle\ContaoManager;
+namespace LinkingYou\SurveyBundle\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
-use Hschottm\SurveyBundle\HschottmSurveyBundle;
+use LinkingYou\SurveyBundle\HschottmSurveyBundle;
 use Hschottm\TextWizardBundle\HschottmTextWizardBundle;
 
 /**

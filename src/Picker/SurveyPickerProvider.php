@@ -8,7 +8,7 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle\Picker;
+namespace LinkingYou\SurveyBundle\Picker;
 
 use Contao\CoreBundle\Framework\FrameworkAwareInterface;
 use Contao\CoreBundle\Framework\FrameworkAwareTrait;

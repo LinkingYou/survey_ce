@@ -34,7 +34,7 @@ $GLOBALS['TL_DCA']['tl_survey_question'] = [
             'fields' => ['sorting'],
             'panelLayout' => 'search,filter,limit',
             'headerFields' => ['title', 'tstamp', 'description'],
-            'child_record_callback' => ['\Hschottm\SurveyBundle\SurveyQuestionPreview', 'compilePreview'],
+            'child_record_callback' => ['\LinkingYou\SurveyBundle\SurveyQuestionPreview', 'compilePreview'],
         ],
         'global_operations' => [
             'all' => [

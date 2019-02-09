@@ -8,7 +8,7 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
- $found = (\strlen(\Input::get('id'))) ? \Hschottm\SurveyBundle\SurveyResultModel::findByPid(\Input::get('id')) : null;
+ $found = (\strlen(\Input::get('id'))) ? \LinkingYou\SurveyBundle\SurveyResultModel::findByPid(\Input::get('id')) : null;
  $hasData = (null !== $found && 0 < $found->count()) ? true : false;
 
 /*

@@ -8,7 +8,7 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
- $found = (\strlen(\Input::get('id'))) ? \Hschottm\SurveyBundle\SurveyResultModel::findByPid(\Input::get('id')) : null;
+ $found = (\strlen(\Input::get('id'))) ? \LinkingYou\SurveyBundle\SurveyResultModel::findByPid(\Input::get('id')) : null;
  $hasData = (null !== $found && 0 < $found->count()) ? true : false;
 
 if ($hasData) {
@@ -61,7 +61,7 @@ $GLOBALS['TL_DCA']['tl_survey_page']['list'] = [
         'fields' => ['sorting'],
         'panelLayout' => 'search,filter,limit',
         'headerFields' => ['title', 'tstamp', 'description'],
-        'child_record_callback' => ['\Hschottm\SurveyBundle\SurveyPagePreview', 'compilePreview'],
+        'child_record_callback' => ['\LinkingYou\SurveyBundle\SurveyPagePreview', 'compilePreview'],
     ],
     'operations' => [
         'edit' => [
@@ -297,7 +297,7 @@ class tl_survey_page extends Backend
     protected function hasData()
     {
         if (null === $this->hasData) {
-          $resultModel = \Hschottm\SurveyBundle\SurveyResultModel::findBy(['pid=?'], [\Input::get('id')]);
+          $resultModel = \LinkingYou\SurveyBundle\SurveyResultModel::findBy(['pid=?'], [\Input::get('id')]);
           $this->hasData = null !== $resultModel && $resultModel->count() > 0;
         }
 

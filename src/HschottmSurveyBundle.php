@@ -10,9 +10,9 @@ declare(strict_types=1);
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle;
+namespace LinkingYou\SurveyBundle;
 
-use Hschottm\SurveyBundle\DependencyInjection\SurveyExtension;
+use LinkingYou\SurveyBundle\DependencyInjection\SurveyExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class HschottmSurveyBundle extends Bundle

@@ -8,12 +8,12 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle\Export;
+namespace LinkingYou\SurveyBundle\Export;
 
-use Hschottm\SurveyBundle\Export\Exporter;
-use Hschottm\SurveyBundle\Export\ExcelExporterPhpSpreadsheet;
-use Hschottm\SurveyBundle\Export\ExcelExporterXLSExport;
-use Hschottm\SurveyBundle\Export\CSVExporter;
+use LinkingYou\SurveyBundle\Export\Exporter;
+use LinkingYou\SurveyBundle\Export\ExcelExporterPhpSpreadsheet;
+use LinkingYou\SurveyBundle\Export\ExcelExporterXLSExport;
+use LinkingYou\SurveyBundle\Export\CSVExporter;
 
 class ExportHelper
 {

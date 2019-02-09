@@ -8,7 +8,7 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle;
+namespace LinkingYou\SurveyBundle;
 
 class Survey extends \Backend
 {
@@ -22,21 +22,21 @@ class Survey extends \Backend
 
     public function getTANforPIN($id, $pin)
     {
-        $pinTanModel = \Hschottm\SurveyBundle\SurveyPinTanModel::findOneBy(['pid=?', 'pin=?'], [$id, $pin]);
+        $pinTanModel = \LinkingYou\SurveyBundle\SurveyPinTanModel::findOneBy(['pid=?', 'pin=?'], [$id, $pin]);
 
         return (null !== $pinTanModel) ? $pinTanModel->tan : null;
     }
 
     public function getPINforTAN($id, $tan)
     {
-        $pinTanModel = \Hschottm\SurveyBundle\SurveyPinTanModel::findOneBy(['pid=?', 'tan=?'], [$id, $tan]);
+        $pinTanModel = \LinkingYou\SurveyBundle\SurveyPinTanModel::findOneBy(['pid=?', 'tan=?'], [$id, $tan]);
 
         return (null !== $pinTanModel) ? $pinTanModel->pin : null;
     }
 
     public function getSurveyStatus($id, $pin)
     {
-        $participantModel = \Hschottm\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'pin=?'], [$id, $pin]);
+        $participantModel = \LinkingYou\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'pin=?'], [$id, $pin]);
         if (null !== $participantModel) {
             return ($participantModel->finished) ? 'finished' : 'started';
         }
@@ -56,9 +56,9 @@ class Survey extends \Backend
     public function checkPINTAN($id, $pin = '', $tan = '')
     {
         if (\strlen($pin)) {
-            $pinTanModel = \Hschottm\SurveyBundle\SurveyPinTanModel::findOneBy(['pid=?', 'pin=?'], [$id, $pin]);
+            $pinTanModel = \LinkingYou\SurveyBundle\SurveyPinTanModel::findOneBy(['pid=?', 'pin=?'], [$id, $pin]);
         } else {
-            $pinTanModel = \Hschottm\SurveyBundle\SurveyPinTanModel::findOneBy(['pid=?', 'tan=?'], [$id, $tan]);
+            $pinTanModel = \LinkingYou\SurveyBundle\SurveyPinTanModel::findOneBy(['pid=?', 'tan=?'], [$id, $tan]);
         }
 
         return (null !== $pinTanModel) ? $pinTanModel->used : false;
@@ -66,7 +66,7 @@ class Survey extends \Backend
 
     public function getSurveyStatusForMember($id, $uid)
     {
-        $participantModel = \Hschottm\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'uid=?'], [$id, $uid]);
+        $participantModel = \LinkingYou\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'uid=?'], [$id, $uid]);
         if (null !== $participantModel) {
             return ($participantModel->finished) ? 'finished' : 'started';
         }
@@ -94,7 +94,7 @@ class Survey extends \Backend
 
     public function getLastPageForPIN($id, $pin)
     {
-        $participantModel = \Hschottm\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'pin=?'], [$id, $pin]);
+        $participantModel = \LinkingYou\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'pin=?'], [$id, $pin]);
 
         return (null !== $participantModel) ? $participantModel->lastpage : 0;
     }

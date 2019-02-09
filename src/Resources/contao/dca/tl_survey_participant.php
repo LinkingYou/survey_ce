@@ -157,7 +157,7 @@ class tl_survey_participant extends \Backend
               /** @var Symfony\Component\HttpFoundation\Session\SessionInterface $objSession */
               $objSession = \System::getContainer()->get('session');
               $session = $objSession->all();
-              $res = \Hschottm\SurveyBundle\SurveyParticipantModel::findBy('pid', \Input::get('id'));
+              $res = \LinkingYou\SurveyBundle\SurveyParticipantModel::findBy('pid', \Input::get('id'));
               if (null !== $res && $res->count() >= 1) {
                   $session['CURRENT']['IDS'] = array_values($res->fetchEach('id'));
                   $objSession->replace($session);
@@ -173,7 +173,7 @@ class tl_survey_participant extends \Backend
 
     public function deleteParticipant($dc)
     {
-        $res = \Hschottm\SurveyBundle\SurveyParticipantModel::findOneBy('id', $dc->id);
+        $res = \LinkingYou\SurveyBundle\SurveyParticipantModel::findOneBy('id', $dc->id);
         if (null !== $res) {
             setcookie('TLsvy_'.$res->pid, $res->pin, time() - 3600, '/');
             $objDelete = $this->Database->prepare('DELETE FROM tl_survey_pin_tan WHERE (pid=? AND pin=?)')->execute($res->pid, $res->pin);
@@ -223,7 +223,7 @@ class tl_survey_participant extends \Backend
     protected function getPageCount($survey_id)
     {
         if (!isset($this->pageCount)) {
-            $res = \Hschottm\SurveyBundle\SurveyPageModel::findBy('pid', $survey_id);
+            $res = \LinkingYou\SurveyBundle\SurveyPageModel::findBy('pid', $survey_id);
             if (null !== $res) {
                 $this->pageCount = $res->count();
             } else {

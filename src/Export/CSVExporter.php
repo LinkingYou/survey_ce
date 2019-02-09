@@ -8,7 +8,7 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle\Export;
+namespace LinkingYou\SurveyBundle\Export;
 
 use Exporter\Writer\CsvWriter;
 

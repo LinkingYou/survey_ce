@@ -8,7 +8,7 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle;
+namespace LinkingYou\SurveyBundle;
 
 class SurveyPagePreview extends \Backend
 {
@@ -32,7 +32,7 @@ class SurveyPagePreview extends \Backend
      */
     public function compilePreview($row, $blnWriteToFile = false)
     {
-        $surveyPageCollection = \Hschottm\SurveyBundle\SurveyPageModel::findBy(['pid=?', 'sorting<?'], [$row['pid'], $row['sorting']]);
+        $surveyPageCollection = \LinkingYou\SurveyBundle\SurveyPageModel::findBy(['pid=?', 'sorting<?'], [$row['pid'], $row['sorting']]);
         $position = (null !== $surveyPageCollection) ? $surveyPageCollection->count() + 1 : 1;
 
         $template = new \FrontendTemplate('be_survey_page_preview');

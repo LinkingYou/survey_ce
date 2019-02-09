@@ -8,17 +8,17 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-use Hschottm\SurveyBundle\ContentSurvey;
-use Hschottm\SurveyBundle\FormConstantSumQuestion;
-use Hschottm\SurveyBundle\FormMatrixQuestion;
-use Hschottm\SurveyBundle\FormMultipleChoiceQuestion;
-use Hschottm\SurveyBundle\FormOpenEndedQuestion;
-use Hschottm\SurveyBundle\SurveyPINTAN;
-use Hschottm\SurveyBundle\SurveyResultDetails;
-use Hschottm\SurveyBundle\SurveyQuestionOpenended;
-use Hschottm\SurveyBundle\SurveyQuestionMultiplechoice;
-use Hschottm\SurveyBundle\SurveyQuestionMatrix;
-use Hschottm\SurveyBundle\SurveyQuestionConstantsum;
+use LinkingYou\SurveyBundle\ContentSurvey;
+use LinkingYou\SurveyBundle\FormConstantSumQuestion;
+use LinkingYou\SurveyBundle\FormMatrixQuestion;
+use LinkingYou\SurveyBundle\FormMultipleChoiceQuestion;
+use LinkingYou\SurveyBundle\FormOpenEndedQuestion;
+use LinkingYou\SurveyBundle\SurveyPINTAN;
+use LinkingYou\SurveyBundle\SurveyResultDetails;
+use LinkingYou\SurveyBundle\SurveyQuestionOpenended;
+use LinkingYou\SurveyBundle\SurveyQuestionMultiplechoice;
+use LinkingYou\SurveyBundle\SurveyQuestionMatrix;
+use LinkingYou\SurveyBundle\SurveyQuestionConstantsum;
 
 /*
  * Add survey element

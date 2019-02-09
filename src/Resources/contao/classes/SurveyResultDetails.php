@@ -8,11 +8,11 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle;
+namespace LinkingYou\SurveyBundle;
 
 use Contao\DataContainer;
-use Hschottm\SurveyBundle\Export\Exporter;
-use Hschottm\SurveyBundle\Export\ExportHelper;
+use LinkingYou\SurveyBundle\Export\Exporter;
+use LinkingYou\SurveyBundle\Export\ExportHelper;
 
 /**
  * Class SurveyResultDetails.
@@ -89,7 +89,7 @@ class SurveyResultDetails extends \Backend
 
         while ($row = $objQuestion->fetchAssoc()) {
             ++$abs_question_no;
-            $class = 'Hschottm\SurveyBundle\SurveyQuestion'.ucfirst($row['questiontype']);
+            $class = 'LinkingYou\SurveyBundle\SurveyQuestion'.ucfirst($row['questiontype']);
 
             if ($this->classFileExists($class)) {
                 $this->import($class);
@@ -138,7 +138,7 @@ class SurveyResultDetails extends \Backend
             $exporter->addSheet($sheet);
             while ($arrQuestions->next()) {
                 $row = $arrQuestions->row();
-                $class = 'Hschottm\SurveyBundle\SurveyQuestion'.ucfirst($row['questiontype']);
+                $class = 'LinkingYou\SurveyBundle\SurveyQuestion'.ucfirst($row['questiontype']);
                 if ($this->classFileExists($class)) {
                     $this->import($class);
                     $question = new $class();
@@ -147,7 +147,7 @@ class SurveyResultDetails extends \Backend
                 }
             }
 
-            $surveyModel = \Hschottm\SurveyBundle\SurveyModel::findOneBy('id', \Input::get('id'));
+            $surveyModel = \LinkingYou\SurveyBundle\SurveyModel::findOneBy('id', \Input::get('id'));
             if (null !== $surveyModel) {
                 $filename = $surveyModel->title;
             } else {
@@ -229,7 +229,7 @@ class SurveyResultDetails extends \Backend
 
                 $rowCounter = 0; // reset rowCounter for the question headers
 
-                $class = 'Hschottm\SurveyBundle\SurveyQuestion'.ucfirst($row['questiontype']);
+                $class = 'LinkingYou\SurveyBundle\SurveyQuestion'.ucfirst($row['questiontype']);
                 if ($this->classFileExists($class)) {
                     $this->import($class);
                     $question = new $class();
@@ -238,7 +238,7 @@ class SurveyResultDetails extends \Backend
                 }
             }
 
-            $surveyModel = \Hschottm\SurveyBundle\SurveyModel::findOneBy('id', $surveyID);
+            $surveyModel = \LinkingYou\SurveyBundle\SurveyModel::findOneBy('id', $surveyID);
             if (null !== $surveyModel) {
                 $filename = $surveyModel->title . '_detail';
             } else {

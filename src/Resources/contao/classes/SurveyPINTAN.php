@@ -8,11 +8,11 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle;
+namespace LinkingYou\SurveyBundle;
 
 use Contao\DataContainer;
-use Hschottm\SurveyBundle\Export\Exporter;
-use Hschottm\SurveyBundle\Export\ExportHelper;
+use LinkingYou\SurveyBundle\Export\Exporter;
+use LinkingYou\SurveyBundle\Export\ExportHelper;
 
 /**
  * Class SurveyPINTAN.
@@ -57,7 +57,7 @@ class SurveyPINTAN extends \Backend
             $pagedata = (null !== $pageModel) ? $pageModel->row() : null;
             $domain = \Environment::get('base');
 
-            $res = \Hschottm\SurveyBundle\SurveyPinTanModel::findBy('pid', \Input::get('pid'), ['order' => 'tstamp DESC, id DESC']);
+            $res = \LinkingYou\SurveyBundle\SurveyPinTanModel::findBy('pid', \Input::get('pid'), ['order' => 'tstamp DESC, id DESC']);
             foreach ($res as $objPINTAN) {
                 $row = $objPINTAN->row();
                 $line = [];
@@ -168,7 +168,7 @@ class SurveyPINTAN extends \Backend
                     );
                     ++$intRowCounter;
                 }
-                $surveyModel = \Hschottm\SurveyBundle\SurveyModel::findOneBy('id', \Input::get('pid'));
+                $surveyModel = \LinkingYou\SurveyBundle\SurveyModel::findOneBy('id', \Input::get('pid'));
                 if (null !== $surveyModel) {
                   $exporter->setFilename('TAN_'.$surveyModel->title);
                 } else {
@@ -203,7 +203,7 @@ class SurveyPINTAN extends \Backend
         // Create import form
         if ('tl_export_survey_pin_tan' === \Input::post('FORM_SUBMIT') && $this->blnSave) {
             $nrOfTAN = $this->Template->nrOfTAN->value;
-            $this->import('\Hschottm\SurveyBundle\Survey', 'svy');
+            $this->import('\LinkingYou\SurveyBundle\Survey', 'svy');
             for ($i = 0; $i < ceil($nrOfTAN); ++$i) {
                 $pintan = $this->svy->generatePIN_TAN();
                 $this->insertPinTan(\Input::get('id'), $pintan['PIN'], $pintan['TAN']);
@@ -216,7 +216,7 @@ class SurveyPINTAN extends \Backend
 
     protected function insertPinTan($pid, $pin, $tan)
     {
-        $newParticipant = new \Hschottm\SurveyBundle\SurveyPinTanModel();
+        $newParticipant = new \LinkingYou\SurveyBundle\SurveyPinTanModel();
         $newParticipant->tstamp = time();
         $newParticipant->pid = $pid;
         $newParticipant->pin = $pin;

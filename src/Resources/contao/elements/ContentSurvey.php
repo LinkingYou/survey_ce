@@ -8,7 +8,7 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle;
+namespace LinkingYou\SurveyBundle;
 
 class ContentSurvey extends \ContentElement
 {
@@ -66,12 +66,12 @@ class ContentSurvey extends \ContentElement
         $this->objSurvey = $this->Database->prepare('SELECT * FROM tl_survey WHERE id=?')
             ->execute($surveyID);
         $this->objSurvey->next();
-        //$this->objSurvey = \Hschottm\SurveyBundle\SurveyModel::findByPk($surveyId);
+        //$this->objSurvey = \LinkingYou\SurveyBundle\SurveyModel::findByPk($surveyId);
         if (null === $this->objSurvey) {
             return;
         }
 
-        $this->import('\Hschottm\SurveyBundle\Survey', 'svy');
+        $this->import('\LinkingYou\SurveyBundle\Survey', 'svy');
 
         // check date activation
         if ((\strlen($this->objSurvey->online_start)) && ($this->objSurvey->online_start > time())) {
@@ -85,7 +85,7 @@ class ContentSurvey extends \ContentElement
             return;
         }
 
-        $pages = \Hschottm\SurveyBundle\SurveyPageModel::findBy('pid', $surveyID, ['order' => 'sorting']);
+        $pages = \LinkingYou\SurveyBundle\SurveyPageModel::findBy('pid', $surveyID, ['order' => 'sorting']);
 
         if (null === $pages) {
             $pages = [];
@@ -128,7 +128,7 @@ class ContentSurvey extends \ContentElement
                             $this->pin = $this->svy->getPINforTAN($this->objSurvey->id, $tan);
 
                             if (0 == $result) {
-                                $res = \Hschottm\SurveyBundle\SurveyPinTanModel::findOneBy(['tan=?', 'pid=?'], [$tan, $this->objSurvey->id]);
+                                $res = \LinkingYou\SurveyBundle\SurveyPinTanModel::findOneBy(['tan=?', 'pid=?'], [$tan, $this->objSurvey->id]);
                                 if (null !== $res) {
                                     $res->used = 1;
                                     $res->save();
@@ -154,7 +154,7 @@ class ContentSurvey extends \ContentElement
                     }
                     break;
                 case 'nonanoncode':
-          $participant = \Hschottm\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'uid=?'], [$this->objSurvey->id, $this->User->id]);
+          $participant = \LinkingYou\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'uid=?'], [$this->objSurvey->id, $this->User->id]);
           if (null !== $participant) {
               if (!$participant->uid) {
                   $pintan = $this->svy->generatePIN_TAN();
@@ -194,7 +194,7 @@ class ContentSurvey extends \ContentElement
 
         // save position of last page (for resume)
         if ($page > 0) {
-            $res = \Hschottm\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'pin=?'], [$this->objSurvey->id, $this->pin]);
+            $res = \LinkingYou\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'pin=?'], [$this->objSurvey->id, $this->pin]);
             if (null !== $res) {
                 $res->lastpage = $page;
                 $res->save();
@@ -251,7 +251,7 @@ class ContentSurvey extends \ContentElement
         $pagequestioncounter = 1;
         $doNotSubmit = false;
 
-        $questions = \Hschottm\SurveyBundle\SurveyQuestionModel::findBy('pid', $pagerow['id'], ['order' => 'sorting']);
+        $questions = \LinkingYou\SurveyBundle\SurveyQuestionModel::findBy('pid', $pagerow['id'], ['order' => 'sorting']);
 
         if (null === $questions) {
             return [];
@@ -284,10 +284,10 @@ class ContentSurvey extends \ContentElement
                 switch ($this->objSurvey->access) {
                     case 'anon':
                     case 'anoncode':
-                        $objResult = \Hschottm\SurveyBundle\SurveyResultModel::findBy(['pid=?', 'qid=?', 'pin=?'], [$this->objSurvey->id, $objWidget->id, $this->pin]);
+                        $objResult = \LinkingYou\SurveyBundle\SurveyResultModel::findBy(['pid=?', 'qid=?', 'pin=?'], [$this->objSurvey->id, $objWidget->id, $this->pin]);
                         break;
                     case 'nonanoncode':
-                        $objResult = \Hschottm\SurveyBundle\SurveyResultModel::findBy(['pid=?', 'qid=?', 'uid=?'], [$this->objSurvey->id, $objWidget->id, $this->User->id]);
+                        $objResult = \LinkingYou\SurveyBundle\SurveyResultModel::findBy(['pid=?', 'qid=?', 'uid=?'], [$this->objSurvey->id, $objWidget->id, $this->User->id]);
                         break;
                 }
                 if (null !== $objResult && $objResult->count()) {
@@ -300,7 +300,7 @@ class ContentSurvey extends \ContentElement
             if (isset($GLOBALS['TL_HOOKS']['surveyQuestionsValidated']) && \is_array($GLOBALS['TL_HOOKS']['surveyQuestionsValidated'])) {
                 foreach ($GLOBALS['TL_HOOKS']['surveyQuestionsValidated'] as $callback) {
                     $this->import($callback[0]);
-                    $this->$callback[0]->$callback[1]($surveypage, $pagerow);
+                    $this->{$callback[0]}->{$callback[1]}($surveypage, $pagerow);
                 }
             }
         } else {
@@ -308,7 +308,7 @@ class ContentSurvey extends \ContentElement
             if (isset($GLOBALS['TL_HOOKS']['surveyQuestionsLoaded']) && \is_array($GLOBALS['TL_HOOKS']['surveyQuestionsLoaded'])) {
                 foreach ($GLOBALS['TL_HOOKS']['surveyQuestionsLoaded'] as $callback) {
                     $this->import($callback[0]);
-                    $this->$callback[0]->$callback[1]($surveypage, $pagerow);
+                    $this->{$callback[0]}->{$callback[1]}($surveypage, $pagerow);
                 }
             }
         }
@@ -334,7 +334,7 @@ class ContentSurvey extends \ContentElement
                 switch ($this->objSurvey->access) {
                     case 'anon':
                     case 'anoncode':
-                      $res = \Hschottm\SurveyBundle\SurveyResultModel::findBy(['pid=?', 'qid=?', 'pin=?'], [$this->objSurvey->id, $question->id, $this->pin]);
+                      $res = \LinkingYou\SurveyBundle\SurveyResultModel::findBy(['pid=?', 'qid=?', 'pin=?'], [$this->objSurvey->id, $question->id, $this->pin]);
                       if (null !== $res) {
                         if ($res instanceof Model) {
                           $res->delete();
@@ -353,7 +353,7 @@ class ContentSurvey extends \ContentElement
                         }
                         break;
                     case 'nonanoncode':
-              $res = \Hschottm\SurveyBundle\SurveyResultModel::findBy(['pid=?', 'qid=?', 'uid=?'], [$this->objSurvey->id, $question->id, $this->User->id]);
+              $res = \LinkingYou\SurveyBundle\SurveyResultModel::findBy(['pid=?', 'qid=?', 'uid=?'], [$this->objSurvey->id, $question->id, $this->User->id]);
               if (null !== $res) {
                   if ($res instanceof Model) {
                       $res->delete();
@@ -378,12 +378,12 @@ class ContentSurvey extends \ContentElement
                 switch ($this->objSurvey->access) {
                     case 'anon':
                     case 'anoncode':
-            $participant = \Hschottm\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'pin=?'], [$this->objSurvey->id, $this->pin]);
+            $participant = \LinkingYou\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'pin=?'], [$this->objSurvey->id, $this->pin]);
             $participant->finished = 1;
             $participant->save();
                         break;
                     case 'nonanoncode':
-            $participant = \Hschottm\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'uid=?'], [$this->objSurvey->id, $this->User->id]);
+            $participant = \LinkingYou\SurveyBundle\SurveyParticipantModel::findOneBy(['pid=?', 'uid=?'], [$this->objSurvey->id, $this->User->id]);
             $participant->finished = 1;
             $participant->save();
                         break;
@@ -392,7 +392,7 @@ class ContentSurvey extends \ContentElement
                 if (isset($GLOBALS['TL_HOOKS']['surveyFinished']) && \is_array($GLOBALS['TL_HOOKS']['surveyFinished'])) {
                     foreach ($GLOBALS['TL_HOOKS']['surveyFinished'] as $callback) {
                         $this->import($callback[0]);
-                        $this->$callback[0]->$callback[1]($this->objSurvey->row());
+                        $this->{$callback[0]}->{$callback[1]}($this->objSurvey->row());
                     }
                 }
 
@@ -423,7 +423,7 @@ class ContentSurvey extends \ContentElement
         					// Set recipient(s)
         					if (strlen($this->objSurvey->confirmationMailRecipientField))
         					{
-                    $res = \Hschottm\SurveyBundle\SurveyResultModel::findOneBy(['qid=?', 'pin=?'], [$this->objSurvey->confirmationMailRecipientField, $this->pin]);
+                    $res = \LinkingYou\SurveyBundle\SurveyResultModel::findOneBy(['qid=?', 'pin=?'], [$this->objSurvey->confirmationMailRecipientField, $this->pin]);
                     if (null !== $res) {
                       if (strlen($res->result))
           						{
@@ -521,7 +521,7 @@ class ContentSurvey extends \ContentElement
         							$objMail->replyTo($objMailProperties->replyTo);
         						}
 
-        						$helper = new \Hschottm\SurveyBundle\SurveyHelper();
+        						$helper = new \LinkingYou\SurveyBundle\SurveyHelper();
 
         						$objMail->subject = $objMailProperties->subject;
 
@@ -600,7 +600,7 @@ class ContentSurvey extends \ContentElement
         if (0 == \strlen($pin)) {
             return false;
         }
-        $participants = \Hschottm\SurveyBundle\SurveyParticipantModel::findBy(['pin=?', 'pid=?'], [$pin, $this->objSurvey->id]);
+        $participants = \LinkingYou\SurveyBundle\SurveyParticipantModel::findBy(['pin=?', 'pid=?'], [$pin, $this->objSurvey->id]);
         if (null === $participants) {
             return false;
         }
@@ -655,7 +655,7 @@ class ContentSurvey extends \ContentElement
 
     protected function insertResult($pid, $qid, $pin, $result, $uid = null)
     {
-        $newResult = new \Hschottm\SurveyBundle\SurveyResultModel();
+        $newResult = new \LinkingYou\SurveyBundle\SurveyResultModel();
         $newResult->tstamp = time();
         $newResult->pid = $pid;
         $newResult->qid = $qid;
@@ -669,7 +669,7 @@ class ContentSurvey extends \ContentElement
 
     protected function insertPinTan($pid, $pin, $tan, $used)
     {
-        $newParticipant = new \Hschottm\SurveyBundle\SurveyPinTanModel();
+        $newParticipant = new \LinkingYou\SurveyBundle\SurveyPinTanModel();
         $newParticipant->tstamp = time();
         $newParticipant->pid = $pid;
         $newParticipant->pin = $pin;
@@ -687,7 +687,7 @@ class ContentSurvey extends \ContentElement
      */
     protected function insertParticipant($pid, $pin, $uid = 0)
     {
-        $newParticipant = new \Hschottm\SurveyBundle\SurveyParticipantModel();
+        $newParticipant = new \LinkingYou\SurveyBundle\SurveyParticipantModel();
         $newParticipant->tstamp = time();
         $newParticipant->pid = $pid;
         $newParticipant->pin = $pin;

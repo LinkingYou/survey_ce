@@ -8,7 +8,7 @@
  * @see	      https://github.com/hschottm/survey_ce
  */
 
-namespace Hschottm\SurveyBundle;
+namespace LinkingYou\SurveyBundle;
 
 /**
  * Class SurveyQuestionPreview.
@@ -61,7 +61,7 @@ class SurveyQuestionPreview extends \Backend
 
     protected function getQuestionNumber($row)
     {
-        $surveyQuestionCollection = \Hschottm\SurveyBundle\SurveyQuestionModel::findBy(['pid=?', 'sorting<=?'], [$row['pid'], $row['sorting']]);
+        $surveyQuestionCollection = \LinkingYou\SurveyBundle\SurveyQuestionModel::findBy(['pid=?', 'sorting<=?'], [$row['pid'], $row['sorting']]);
 
         return (null !== $surveyQuestionCollection) ? $surveyQuestionCollection->count() : 0;
     }
